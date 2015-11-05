@@ -22,6 +22,8 @@ accounts-password
 msavin:mongol
 accounts-facebook
 useraccounts:bootstrap
-accounts-google
 useraccounts:iron-routing
 underscore
+service-configuration
+accounts-ui
+accounts-google
