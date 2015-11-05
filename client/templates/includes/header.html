@@ -1,0 +1,27 @@
+<template name="header">
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="{{pathFor 'home'}}">Authentication Sample</a>
+            </div>
+            <div>
+                {{#if currentUser}}
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="#" class="logout">Logout</a>
+                        </li>
+                        <li class="active">
+                            <a href="{{pathFor 'profile'}}">{{username}}</a>
+                        </li>
+                    </ul>
+                {{else}}
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="active">
+                            <a href="{{pathFor 'login'}}">Login</a>
+                        </li>
+                    </ul>
+                {{/if}}
+            </div>
+        </div>
+    </nav>
+</template>
