@@ -1,3 +1,11 @@
+Template.profile.helpers({
+    showChangePassword: function() {
+        var user = Meteor.user();
+        if (user)
+            return user.username ? true : false;
+    }
+});
+
 Template.profile.events({
     "click a.logout": function(e, t) {
         e.preventDefault();
