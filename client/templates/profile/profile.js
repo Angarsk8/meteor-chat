@@ -3,6 +3,13 @@ Template.profile.helpers({
         var user = Meteor.user();
         if (user)
             return user.username ? true : false;
+    },
+    canChangePassword: function() {
+        var user = Meteor.user();
+        if (user) {
+            console.log(user.registeredServices);
+            return _.contains(user.registeredServices, "password");
+        }
     }
 });
 

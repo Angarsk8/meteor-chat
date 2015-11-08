@@ -1,4 +1,4 @@
-Template.signUp.helpers({
+Template.userAccounts.helpers({
     atDisabled: function() {
         return AccountsTemplates.disabled();
     },

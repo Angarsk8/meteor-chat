@@ -4,9 +4,13 @@
             <h3>The user <span style="color: red;">{{username}}</span> is currently logged in!</h3>
             <p>User Options</p>
             <ul>
-                {{#if showChangePassword}}
+                {{#if canChangePassword}}
                     <li>
                         <a href="{{pathFor 'changePassword'}}">Change Password</a>
+                    </li>
+                {{else}}
+                    <li>
+                        <a href="{{pathFor 'resetPassword'}}">Reset Password</a>
                     </li>
                 {{/if}}
                 <li>
