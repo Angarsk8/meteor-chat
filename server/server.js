@@ -65,3 +65,11 @@ Accounts.onCreateUser(function(options, user) {
     }
     return user;
 });
+
+// Meteor.users.before.update(function(userId, doc, fieldNames, modifier, options) {
+
+// });
+
+// Meteor.users.after.update(function(userId, doc, fieldNames, modifier, options) {
+
+// });

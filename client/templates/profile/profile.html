@@ -1,5 +1,6 @@
 <template name="profile">
     <div class="container">
+        {{#unless isLoading}}
         <div class="jumbotron" style="margin-top: 100px;">
             <h3>The user <span style="color: red;">{{username}}</span> is currently logged in!</h3>
             <p>User Options</p>
@@ -10,13 +11,19 @@
                     </li>
                 {{else}}
                     <li>
-                        <a href="{{pathFor 'resetPassword'}}">Reset Password</a>
+                        <a class="reset" href="#">Reset Password</a>
                     </li>
                 {{/if}}
+                <li>
+                    <a class="logout-other-clients" href="#">Logout Other Clients</a>
+                </li>
                 <li>
                     <a class="logout" href="#">Logout</a>
                 </li>
             </ul>
         </div>
+        {{else}}
+            {{> spinner}}
+        {{/unless}}
     </div>
 </template>

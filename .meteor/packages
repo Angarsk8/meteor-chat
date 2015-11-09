@@ -28,3 +28,5 @@ service-configuration
 accounts-ui
 accounts-google
 sacha:spin
+check
+matb33:collection-hooks
