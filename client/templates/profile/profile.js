@@ -22,9 +22,9 @@ Template.profile.events({
         e.preventDefault();
         AccountsTemplates.logout(function(err) {
             if (err) {
-                console.error("an error has ocurred while logging you out: " + err.reason);
+                alert("an error has ocurred while logging you out: " + err.reason);
             } else {
-                console.info("logged out succesfully");
+                alert("logged out succesfully");
             }
         });
     },
@@ -35,9 +35,9 @@ Template.profile.events({
         Accounts.logoutOtherClients(function(err) {
             Session.set("loading", false);
             if (err) {
-                console.error("an error has ocurred while logging out other clients: " + err.reason);
+                alert("an error has ocurred while logging out other clients: " + err.reason);
             } else {
-                console.info("other clients logged out succesfully");
+                alert("other clients logged out succesfully");
             }
         });
     },
@@ -52,10 +52,10 @@ Template.profile.events({
             Accounts.forgotPassword(options, function(err) {
                 Session.set("loading", false);
                 if (err) {
-                    console.log(err);
+                    alert(err);
                     return;
                 }
-                console.info("An email for resetting the password has been sent");
+                alert("An email for resetting the password has been sent");
             });
         }
     }

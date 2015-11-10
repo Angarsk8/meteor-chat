@@ -66,10 +66,21 @@ Accounts.onCreateUser(function(options, user) {
     return user;
 });
 
-// Meteor.users.before.update(function(userId, doc, fieldNames, modifier, options) {
-
-// });
-
-// Meteor.users.after.update(function(userId, doc, fieldNames, modifier, options) {
-
+// Accounts.onLogin(function(result) {
+//     var user = result.user;
+//     if (user) {
+//         if (user.services.resume.loginTokens) {
+//             console.log(user.services.resume.loginTokens);
+//             var loginToken = _.last(user.services.resume.loginTokens);
+//             Meteor.users.update({
+//                 _id: user._id
+//             }, {
+//                 $set: {
+//                     "services.resume.loginTokens": [loginToken]
+//                 }
+//             }, {
+//                 multi: true
+//             });
+//         }
+//     }
 // });

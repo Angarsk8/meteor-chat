@@ -3,9 +3,9 @@ Template.header.events({
         e.preventDefault();
         AccountsTemplates.logout(function(err) {
             if (err) {
-                console.error("an error has ocurred while logging you out: " + err.reason);
+                alert("an error has ocurred while logging you out: " + err.reason);
             } else {
-                console.info("logged out succesfully");
+                alert("logged out succesfully");
             }
         });
     }

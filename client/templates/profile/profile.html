@@ -1,8 +1,8 @@
 <template name="profile">
     <div class="container">
         {{#unless isLoading}}
-        <div class="jumbotron" style="margin-top: 100px;">
-            <h3>The user <span style="color: red;">{{username}}</span> is currently logged in!</h3>
+        <div class="jumbotron" style="margin-top: 50px;">
+            <h3>The user <span style="color: green;">{{username}}</span> is currently logged in!</h3>
             <p>User Options</p>
             <ul>
                 {{#if canChangePassword}}
@@ -11,7 +11,7 @@
                     </li>
                 {{else}}
                     <li>
-                        <a class="reset" href="#">Reset Password</a>
+                        <a class="reset" href="#" style="color: red;">Reset Password (WIP)</a>
                     </li>
                 {{/if}}
                 <li>
