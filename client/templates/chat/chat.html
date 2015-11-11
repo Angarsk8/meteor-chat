@@ -10,21 +10,7 @@
                         <ul class="media-list">
                             {{#transition in="fadeIn" }}
                                 {{#each messages}}
-                                    <li class="media animated out">
-                                        <div class="media-body">
-                                            <div class="media">
-                                                <a class="pull-left" href="#">
-                                                    <img class="media-object img-circle " style="max-height:50px;" src="{{authorImage}}" />
-                                                </a>
-                                                <div class="media-body">
-                                                    {{body}}
-                                                    <br />
-                                                    <small class="text-muted">{{author}} | {{submitted}}</small>
-                                                    <hr />
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
+                                    {{> message}}
                                 {{/each}}
                             {{/transition}}
                         </ul>
@@ -72,4 +58,21 @@
             </div>
         </div>
     </div>
+</template>
+<template name="message">
+    <li class="media animated out">
+        <div class="media-body">
+            <div class="media">
+                <a class="pull-left" href="#">
+                    <img class="media-object img-circle " style="max-height:50px;" src="{{authorImage}}" />
+                </a>
+                <div class="media-body">
+                    {{body}}
+                    <br />
+                    <small class="text-muted">{{author}} | {{submitted}}</small>
+                    <hr />
+                </div>
+            </div>
+        </div>
+    </li>
 </template>

@@ -37,6 +37,12 @@ Template.chatRoom.onRendered(function() {
     }, 300);
 });
 
+Template.message.onRendered(function() {
+    $('.messages-panel').stop().animate({
+        scrollTop: $(".messages-panel")[0].scrollHeight
+    }, 1000);
+});
+
 
 Template.chatRoom.events = {
     'keydown input#message': function(e) {
