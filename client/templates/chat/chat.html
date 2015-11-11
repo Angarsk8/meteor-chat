@@ -1,0 +1,75 @@
+<template name="chatRoom">
+    <div class="container">
+        <div class="row " style="padding-top:40px;">
+            <div class="col-md-8">
+                <div class="panel panel-default">
+                    <div class="panel-heading" style="color: #5e5e5e;">
+                        RECENT CHAT HISTORY
+                    </div>
+                    <div class="panel-body messages-panel" style="overflow-y: scroll;height: 450px;">
+                        <ul class="media-list">
+                            {{#transition in="fadeIn" }}
+                                {{#each messages}}
+                                    <li class="media animated out">
+                                        <div class="media-body">
+                                            <div class="media">
+                                                <a class="pull-left" href="#">
+                                                    <img class="media-object img-circle " style="max-height:50px;" src="{{authorImage}}" />
+                                                </a>
+                                                <div class="media-body">
+                                                    {{body}}
+                                                    <br />
+                                                    <small class="text-muted">{{author}} | {{submitted}}</small>
+                                                    <hr />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                {{/each}}
+                            {{/transition}}
+                        </ul>
+                    </div>
+                    <div class="panel-footer">
+                        <div class="input-group">
+                            <input id="message" type="text" class="form-control" placeholder="Enter Message" />
+                            <span class="input-group-btn">
+                                        <button class="btn btn-info send-button" type="button">SEND</button>
+                                    </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="panel panel-default">
+                    <div class="panel-heading" style="color: #5e5e5e;">
+                        USERS LIST
+                    </div>
+                    <div class="panel-body" style="max-height: 520px;overflow: scroll;">
+                        <ul class="media-list">
+                            {{#transition in="fadeInDown" }}
+                                {{#each users}}
+                                    <li class="media animated out" style="border-bottom: 1px solid rgba(0, 0, 0, 0.11); padding-bottom: 10px;">
+                                        <div class="media-body">
+                                            <div class="media">
+                                                <a class="pull-left" href="#">
+                                                    <img class="media-object img-circle" style="max-height:40px;" src="{{profile.picture}}" />
+                                                </a>
+                                                <div class="media-body">
+                                                    <h5>{{username}}
+                                                        <span class="glyphicon glyphicon-user pull-right" aria-hidden="true" style="color: rgba(0, 160, 0, 0.8);"></span>
+                                                        <small class="text-muted">online</small>
+                                                    </h5>
+                                                    <small class="text-muted">Active From X Hours</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                {{/each}}
+                            {{/transition}}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

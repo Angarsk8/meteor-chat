@@ -7,3 +7,17 @@ Meteor.publish("userData", function() {
         }
     });
 });
+
+Meteor.publish("allUsers", function() {
+    return Meteor.users.find({}, {
+        fields: {
+            'username': 1,
+            'profile': 1,
+            'services.resume': 1
+        }
+    });
+});
+
+Meteor.publish("messages", function() {
+    return Messages.find({});
+})

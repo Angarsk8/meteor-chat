@@ -26,6 +26,10 @@ Accounts.onCreateUser(function(options, user) {
         user.registeredServices = [];
         user.registeredServices.push(newService);
         email = user.services[service].email;
+        if (user.profile == null) {
+            user.profile = {};
+            user.profile.picture = "http://icons.iconarchive.com/icons/flat-icons.com/flat/512/Meteor-icon.png"
+        }
         if (email != null) {
             oldUser = Meteor.users.findOne({
                 "emails.address": email
@@ -45,6 +49,14 @@ Accounts.onCreateUser(function(options, user) {
                             verified: true
                         }];
                     }
+                    if (user.profile.picture == null) {
+                        if (service === 'google') {
+                            user.profile.picture = user.services[service].picture;
+                        }
+                        if (service === 'facebook') {
+                            user.profile.picture = "http://graph.facebook.com/" + user.services.facebook.id + "/picture/?type=large";
+                        }
+                    }
                 }
             } else {
                 if (service === "google" || service === "facebook") {
@@ -54,8 +66,16 @@ Accounts.onCreateUser(function(options, user) {
                             verified: true
                         }];
                         user.username = getValidUsername(user.services[service].email);
-                        user.profile = {};
+                        if (user.profile == null) {
+                            user.profile = {};
+                        }
                         user.profile.name = user.services[service].name;
+                        if (service === 'google') {
+                            user.profile.picture = user.services[service].picture;
+                        }
+                        if (service === 'facebook') {
+                            user.profile.picture = "http://graph.facebook.com/" + user.services.facebook.id + "/picture/?type=large";
+                        }
                     } else {
                         throw new Meteor.Error(500, service + " account has no email attached");
                     }

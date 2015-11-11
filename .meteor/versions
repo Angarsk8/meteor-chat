@@ -102,3 +102,4 @@ useraccounts:core@1.12.4
 useraccounts:iron-routing@1.12.4
 webapp@1.2.3
 webapp-hashing@1.0.5
+webtempest:animate@0.1.9

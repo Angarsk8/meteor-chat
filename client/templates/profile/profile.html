@@ -1,27 +1,29 @@
 <template name="profile">
     <div class="container">
         {{#unless isLoading}}
-        <div class="jumbotron" style="margin-top: 50px;">
-            <h3>The user <span style="color: green;">{{username}}</span> is currently logged in!</h3>
-            <p>User Options</p>
-            <ul>
-                {{#if canChangePassword}}
-                    <li>
-                        <a href="{{pathFor 'changePassword'}}">Change Password</a>
-                    </li>
-                {{else}}
-                    <li>
-                        <a class="reset" href="#" style="color: red;">Reset Password (WIP)</a>
-                    </li>
-                {{/if}}
-                <li>
-                    <a class="logout-other-clients" href="#">Logout Other Clients</a>
-                </li>
-                <li>
-                    <a class="logout" href="#">Logout</a>
-                </li>
-            </ul>
-        </div>
+            <div class="jumbotron" style="margin-top: 25px;">
+                <div class="container">
+                    <h3>The user <span style="color: green;">{{currentUsername}}</span> is currently logged in!</h3>
+                    <p>User Options</p>
+                    <ul>
+                        {{#if canChangePassword}}
+                            <li>
+                                <a href="{{pathFor 'changePassword'}}">Change Password</a>
+                            </li>
+                        {{else}}
+                            <li>
+                                <a class="reset" href="#" style="color: red;">Reset Password (WIP)</a>
+                            </li>
+                        {{/if}}
+                        <li>
+                            <a class="logout-other-clients" href="#">Logout Other Clients</a>
+                        </li>
+                        <li>
+                            <a class="logout" href="#">Logout</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         {{else}}
             {{> spinner}}
         {{/unless}}
