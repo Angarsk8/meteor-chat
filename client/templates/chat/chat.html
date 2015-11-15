@@ -6,21 +6,16 @@
                     <div class="panel-heading" style="color: #5e5e5e;">
                         RECENT CHAT HISTORY
                     </div>
-                    <div class="panel-body messages-panel" style="overflow-y: scroll;height: 450px;">
-                        <ul class="media-list">
-                            {{#transition in="fadeIn" }}
-                                {{#each messages}}
-                                    {{> message}}
-                                {{/each}}
-                            {{/transition}}
-                        </ul>
-                    </div>
+                    <!-- <div class="panel-body messages-panel" style="overflow: auto;height: 450px;"> -->
+                    {{> messagesPanel}}
+                    <!-- </div> -->
+                    <!-- <div class="alert alert-info text-center animated {{showClass}}" role="alert" style="margin-bottom: 0px;border-radius: 0;cursor:pointer;">There are {{unreadMessages}} messages to read</div> -->
                     <div class="panel-footer">
                         <div class="input-group">
                             <input id="message" type="text" class="form-control" placeholder="Enter Message" />
                             <span class="input-group-btn">
-                                        <button class="btn btn-info send-button" type="button">SEND</button>
-                                    </span>
+                                <button class="btn btn-info send-button" type="button">SEND</button>
+                            </span>
                         </div>
                     </div>
                 </div>
@@ -30,15 +25,15 @@
                     <div class="panel-heading" style="color: #5e5e5e;">
                         USERS LIST
                     </div>
-                    <div class="panel-body" style="max-height: 520px;overflow: scroll;">
+                    <div class="panel-body" style="max-height: 520px;overflow: auto;">
                         <ul class="media-list">
-                            {{#transition in="fadeInDown" }}
+                            {{#transition in="fadeInDown" out="fadeOut" }}
                                 {{#each users}}
                                     <li class="media animated out" style="border-bottom: 1px solid rgba(0, 0, 0, 0.11); padding-bottom: 10px;">
                                         <div class="media-body">
                                             <div class="media">
                                                 <a class="pull-left" href="#">
-                                                    <img class="media-object img-circle" style="max-height:40px;" src="{{profile.picture}}" />
+                                                    <img class="media-object img-circle" style="height: 40px; width: 40px;" src="{{profile.picture}}" />
                                                 </a>
                                                 <div class="media-body">
                                                     <h5>{{username}}
@@ -59,20 +54,45 @@
         </div>
     </div>
 </template>
+<template name="messagesPanel">
+    {{#if Template.subscriptionsReady}}
+        <div class="panel-body messages-panel" style="overflow: auto;height: 450px;">
+            <ul class="media-list">
+                {{> messages}}
+            </ul>
+        </div>
+        {{#transition in="fadeIn" out="fadeOut" }}
+            <div class="alert alert-info text-center notification-panel hidden" role="alert" style="margin-bottom: 0px;border-radius: 0;cursor:pointer;"><span id="unread-messages"></span> new messages!</div>
+        {{/transition}}
+    {{else}}
+        <div class="panel-body messages-panel" style="overflow: auto;height: 450px;">
+            {{> spinner}}
+        </div>
+    {{/if}}
+</template>
+<template name="messages">
+    {{#each messages}}
+        {{> message}}
+    {{/each}}
+</template>
 <template name="message">
-    <li class="media animated out">
-        <div class="media-body">
-            <div class="media">
-                <a class="pull-left" href="#">
-                    <img class="media-object img-circle " style="max-height:50px;" src="{{authorImage}}" />
-                </a>
-                <div class="media-body">
-                    {{body}}
-                    <br />
-                    <small class="text-muted">{{author}} | {{submitted}}</small>
-                    <hr />
+    {{#transition in="fadeInDown" out="fadeOut" }}
+        <li class="media animated out message" id="{{_id}}">
+            <div class="media-body">
+                <div class="media">
+                    <a class="pull-left" href="#">
+                        <img class="media-object img-circle " style="max-height:50px;" src="{{authorImage}}" />
+                    </a>
+                    <div class="media-body">
+                        {{#autolink}}
+                            {{body}}
+                        {{/autolink}}
+                        <br />
+                        <small class="text-muted">{{author}} | {{submitted}}</small>
+                        <hr />
+                    </div>
                 </div>
             </div>
-        </div>
-    </li>
+        </li>
+    {{/transition}}
 </template>

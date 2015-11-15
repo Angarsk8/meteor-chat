@@ -1,0 +1,16 @@
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+        height: auto;
+        padding: auto;
+    }
+    to {
+        opacity: 0;
+        height: 0;
+        padding: 0;
+    }
+}
+
+.fadeOut {
+    animation-name: fadeOut;
+}
