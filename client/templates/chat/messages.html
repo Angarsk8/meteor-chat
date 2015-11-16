@@ -1,0 +1,26 @@
+<template name="messages">
+    {{#each messages}}
+        {{> message}}
+    {{/each}}
+</template>
+<template name="message">
+    {{#transition in="fadeInDown" out="fadeOut" }}
+        <li class="media animated out message" id="{{_id}}">
+            <div class="media-body">
+                <div class="media">
+                    <a class="pull-left" href="#">
+                        <img class="media-object img-circle " style="max-height:50px;" src="{{authorImage}}" />
+                    </a>
+                    <div class="media-body">
+                        {{#autolink}}
+                            {{body}}
+                        {{/autolink}}
+                        <br />
+                        <small class="text-muted">{{author}} | {{submitted}}</small>
+                        <hr />
+                    </div>
+                </div>
+            </div>
+        </li>
+    {{/transition}}
+</template>

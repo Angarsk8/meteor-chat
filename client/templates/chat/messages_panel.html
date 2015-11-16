@@ -1,0 +1,16 @@
+<template name="messagesPanel">
+    {{#if Template.subscriptionsReady}}
+        <div class="panel-body messages-panel" style="overflow: auto;height: 450px;">
+            <ul class="media-list">
+                {{> messages}}
+            </ul>
+        </div>
+        {{#transition in="fadeIn" out="fadeOut" }}
+            <div class="alert alert-info text-center notification-panel hidden" role="alert" style="margin-bottom: 0px;border-radius: 0;cursor:pointer;"><span id="unread-messages"></span></div>
+        {{/transition}}
+    {{else}}
+        <div class="panel-body messages-panel" style="overflow: auto;height: 450px;">
+            {{> spinner}}
+        </div>
+    {{/if}}
+</template>
