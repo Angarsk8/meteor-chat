@@ -1,17 +1,15 @@
 var hideMessagesNotification = function(time) {
     $("#more-messages-info")
         .delay(time)
+        .removeAttr("id")
+        .addClass("remove")
         .hide("slow", function() {
             $(this).remove();
         });
-}
+};
 
 Template.messagesPanel.onCreated(function() {
     this.subscribe('messages');
-});
-
-Template.messagesPanel.onRendered(function() {
-    Template.messagesPanel.showClass = "hidden";
 });
 
 Template.messagesPanel.events({
@@ -21,18 +19,25 @@ Template.messagesPanel.events({
         var fixValue = 60;
         var topOfNotificationPanel = $("#more-messages-info").position().top - fixValue;
         scrollDownToElement(scrollTop, topOfNotificationPanel, 1000);
-        hideMessagesNotification(5000);
+        hideMessagesNotification(6000);
     },
     'scroll .messages-panel': function(e) {
         var panelHeight = 450,
+            scrollTop = $(".messages-panel").scrollTop(),
             scrollHeight = $(".messages-panel")[0].scrollHeight,
-            scrollLevel = $(".messages-panel").scrollTop() + panelHeight;
-        if ((scrollHeight - scrollLevel) < 150) {
-            $(".notification-panel").fadeOut(1000, function() {
-                $(this).addClass("hidden");
-                hideMessagesNotification(5000);
-                Session.set("submittedMessages", Messages.find({}).count());
-            });
+            scrollLevel = scrollTop + panelHeight,
+            $moreMessagesInfoEl = $("#more-messages-info");
+
+        if ($moreMessagesInfoEl.length !== 0) {
+            var topOfNotificationPanel = $moreMessagesInfoEl.position().top,
+                scrollLevelBefore = scrollTop + topOfNotificationPanel;
+            if (scrollLevel > scrollLevelBefore) {
+                $(".notification-panel").fadeOut(1000, function() {
+                    $(this).addClass("hidden");
+                    hideMessagesNotification(6000);
+                    Session.set("submittedMessages", Messages.find({}).count());
+                });
+            };
         }
     }
 });

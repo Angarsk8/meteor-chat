@@ -1,4 +1,6 @@
-MAX_MESSAGES = 10;
+var MAX_MESSAGES = 10,
+    PANEL_HEIGHT = 450,
+    MIN_SCROLL = 150;
 
 scrollPanelDown = function(scrollHeight, time) {
     $('.messages-panel').stop().animate({
@@ -13,7 +15,7 @@ scrollDownToElement = function(scrollTop, topOfNotificationPanel, time) {
 }
 
 var pluralize = function(delta) {
-    if (delta > 10) {
+    if (delta > MAX_MESSAGES) {
         return "More Than 10 New Messages"
     } else if (delta > 1) {
         return delta + " New Messages";
@@ -47,26 +49,36 @@ showHideNotificationPanel = function() {
         submittedMessages = Session.get("submittedMessages"),
         delta = currentMessages - submittedMessages;
 
-    var panelHeight = 450,
-        scrollHeight = $(".messages-panel")[0].scrollHeight,
-        scrollLevel = $(".messages-panel").scrollTop() + panelHeight,
+    var $messagesPanel = $(".messages-panel"),
+        $notificationPanel = $(".notification-panel"),
+        $moreMessagesInfoEl = $("#more-messages-info"),
+        $toRemove = $(".remove"),
+        scrollHeight = $messagesPanel[0].scrollHeight,
+        scrollLevel = $messagesPanel.scrollTop() + PANEL_HEIGHT,
         scrollDiff = scrollHeight - scrollLevel;
 
-    if (scrollDiff > 150) {
+    if (scrollDiff > MIN_SCROLL) {
         if (delta > 0) {
-            $(".notification-panel")
+            $notificationPanel
                 .removeClass("hidden")
                 .fadeIn("slow", function() {
                     $(this).find("span#unread-messages").html(pluralize(delta));
                 });
-            if ($("#more-messages-info").length === 0) {
+            if ($moreMessagesInfoEl.length === 0) {
+                if ($toRemove.length > 0) {
+                    $toRemove
+                        .dequeue()
+                        .hide("slow", function() {
+                            $(this).remove();
+                        });
+                }
                 insertNewMessagesNotification(delta);
             } else {
                 var count = delta < MAX_MESSAGES ? delta : MAX_MESSAGES;
                 updateMessagesNotification(count);
             }
         } else {
-            $(".notification-panel").fadeOut("slow");
+            $notificationPanel.fadeOut("slow");
         }
     } else {
         scrollPanelDown(scrollLevel, 1000);
