@@ -27,11 +27,17 @@ Template.usersList.helpers({
     },
     lastActivity: function() {
         var status = this.status;
-        var lastActivity = status.lastActivity;
-        if (lastActivity != null) {
-            return "Last Activity " + relativeTime(lastActivity);
-        } else {
-            return "Currently Active";
+        if (status) {
+            var lastActivity = status.lastActivity;
+            if (!status.online) {
+                return "Currently Offline";
+            } else {
+                if (lastActivity != null) {
+                    return "Last Activity " + relativeTime(lastActivity);
+                } else {
+                    return "Currently Active";
+                }
+            }
         }
     }
 });

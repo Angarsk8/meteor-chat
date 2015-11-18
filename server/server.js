@@ -86,21 +86,4 @@ Accounts.onCreateUser(function(options, user) {
     return user;
 });
 
-// Accounts.onLogin(function(result) {
-//     var user = result.user;
-//     if (user) {
-//         if (user.services.resume.loginTokens) {
-//             console.log(user.services.resume.loginTokens);
-//             var loginToken = _.last(user.services.resume.loginTokens);
-//             Meteor.users.update({
-//                 _id: user._id
-//             }, {
-//                 $set: {
-//                     "services.resume.loginTokens": [loginToken]
-//                 }
-//             }, {
-//                 multi: true
-//             });
-//         }
-//     }
-// });
+process.env.HTTP_FORWARDED_COUNT = 1;
