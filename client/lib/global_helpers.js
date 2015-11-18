@@ -7,3 +7,4 @@ Template.registerHelper("currentUsername", function() {
 Template.registerHelper('formatDate', function(date) {
   return moment(date).format('MM/DD/YYYY, hh:mm');
 });
+

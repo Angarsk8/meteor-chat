@@ -1,6 +1,6 @@
 var MAX_MESSAGES = 10,
     PANEL_HEIGHT = 450,
-    MIN_SCROLL = 250;
+    MIN_SCROLL = 150;
 
 scrollPanelDown = function(scrollHeight, time) {
     $('.messages-panel')
@@ -16,7 +16,7 @@ scrollDownToElement = function(scrollTop, topOfNotificationPanel, time) {
         .animate({
             scrollTop: (scrollTop + topOfNotificationPanel)
         }, time);
-}
+};
 
 var pluralize = function(delta) {
     if (delta > MAX_MESSAGES) {
@@ -35,7 +35,7 @@ var updateMessagesNotification = function(delta) {
         .find("div")
         .last()
         .html(message);
-}
+};
 
 var insertNewMessagesNotification = function(delta) {
     var child = $(".message:nth-last-child(" + delta + ")");
@@ -45,7 +45,38 @@ var insertNewMessagesNotification = function(delta) {
         "Last Message</div>" +
         "</div>";
     child.before(moreMessagesInfoEl);
-}
+};
+
+var handleNotificationMessages = function(delta, $more, $remove) {
+    if ($more.length === 0) {
+        if ($remove.length > 0) {
+            $remove
+                .dequeue()
+                .hide("slow", function() {
+                    $(this).remove();
+                });
+        }
+        insertNewMessagesNotification(delta);
+    } else {
+        var count = delta < MAX_MESSAGES ? delta : MAX_MESSAGES;
+        updateMessagesNotification(count);
+    }
+};
+
+var messagesNotificationLogic = function(delta, $panel, $more, $remove) {
+    if (delta > 0) {
+        $panel
+            .removeClass("hidden")
+            .fadeIn("slow", function() {
+                $(this).find("span#unread-messages").html(pluralize(delta));
+            });
+        handleNotificationMessages(delta, $more, $remove);
+        Session.set("unreadMessages", delta);
+    } else {
+        $panel.fadeOut("slow");
+        Session.set("unreadMessages", undefined);
+    }
+};
 
 showHideNotificationPanel = function() {
 
@@ -61,31 +92,21 @@ showHideNotificationPanel = function() {
         scrollLevel = $messagesPanel.scrollTop() + PANEL_HEIGHT,
         scrollDiff = scrollHeight - scrollLevel;
 
-    if (scrollDiff > MIN_SCROLL) {
-        if (delta > 0) {
-            $notificationPanel
-                .removeClass("hidden")
-                .fadeIn("slow", function() {
-                    $(this).find("span#unread-messages").html(pluralize(delta));
-                });
-            if ($moreMessagesInfoEl.length === 0) {
-                if ($toRemove.length > 0) {
-                    $toRemove
-                        .dequeue()
-                        .hide("slow", function() {
-                            $(this).remove();
-                        });
-                }
-                insertNewMessagesNotification(delta);
-            } else {
-                var count = delta < MAX_MESSAGES ? delta : MAX_MESSAGES;
-                updateMessagesNotification(count);
-            }
+    var status = Meteor.user().status;
+
+    if (status) {
+        if (scrollDiff > MIN_SCROLL) {
+            console.log(scrollLevel,"1");
+            messagesNotificationLogic(delta, $notificationPanel, $moreMessagesInfoEl, $toRemove);
+        } else if (status.idle && scrollLevel > PANEL_HEIGHT) {
+            console.log(scrollLevel,"2");
+            messagesNotificationLogic(delta, $notificationPanel, $moreMessagesInfoEl, $toRemove);
         } else {
-            $notificationPanel.fadeOut("slow");
+            scrollPanelDown(scrollLevel, 1000);
+            console.log(scrollLevel,"3");
+            Session.set("submittedMessages", Messages.find({}).count());
+            Session.set("unreadMessages", undefined);
         }
-    } else {
-        scrollPanelDown(scrollLevel, 1000);
-        Session.set("submittedMessages", Messages.find({}).count());
     }
+
 }

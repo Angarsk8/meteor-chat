@@ -45,7 +45,7 @@ Template.usersList.helpers({
 Tracker.autorun(function(c) {
     try {
         UserStatus.startMonitor({
-            threshold: 30000,
+            threshold: 120000,
             idleOnBlur: true
         });
         return c.stop();

@@ -13,7 +13,15 @@ var sendMessage = function() {
                 }
             });
             var scrollHeight = $(".messages-panel")[0].scrollHeight;
+            var $remove = $(".remove");
             scrollPanelDown(scrollHeight, 1000);
+            if ($remove.length > 0) {
+                $remove
+                    .dequeue()
+                    .hide("slow", function() {
+                        $(this).remove();
+                    });
+            }
             Session.set("submittedMessages", Messages.find({}).count());
             inputMessage.val("");
         }
