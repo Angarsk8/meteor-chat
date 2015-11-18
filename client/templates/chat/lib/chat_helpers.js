@@ -1,17 +1,21 @@
 var MAX_MESSAGES = 10,
     PANEL_HEIGHT = 450,
-    MIN_SCROLL = 150;
+    MIN_SCROLL = 250;
 
 scrollPanelDown = function(scrollHeight, time) {
-    $('.messages-panel').stop().animate({
-        scrollTop: scrollHeight
-    }, time);
+    $('.messages-panel')
+        .stop()
+        .animate({
+            scrollTop: scrollHeight
+        }, time);
 };
 
 scrollDownToElement = function(scrollTop, topOfNotificationPanel, time) {
-    $('.messages-panel').stop().animate({
-        scrollTop: (scrollTop + topOfNotificationPanel)
-    }, time);
+    $('.messages-panel')
+        .stop()
+        .animate({
+            scrollTop: (scrollTop + topOfNotificationPanel)
+        }, time);
 }
 
 var pluralize = function(delta) {
@@ -21,7 +25,7 @@ var pluralize = function(delta) {
         return delta + " New Messages";
     } else if (delta === 1) {
         return "1 New Message"
-    };
+    }
 };
 
 var updateMessagesNotification = function(delta) {

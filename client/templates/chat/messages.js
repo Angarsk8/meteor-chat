@@ -4,6 +4,12 @@ Template.messages.helpers({
     }
 });
 
+Template.message.helpers({
+    createdAtFormatted: function() {
+        return moment(this.submitted).format('MM/DD/YYYY, HH:MM');
+    }
+});
+
 Template.messages.onRendered(function() {
     var scrollLevel = $(".messages-panel")[0].scrollHeight;
     scrollPanelDown(scrollLevel, 0);

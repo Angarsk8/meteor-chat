@@ -3,3 +3,7 @@ Template.registerHelper("currentUsername", function() {
     if (user) 
         return user.username != null ? user.username : user.profile.name;
 });
+
+Template.registerHelper('formatDate', function(date) {
+  return moment(date).format('MM/DD/YYYY, hh:mm');
+});

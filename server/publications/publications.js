@@ -13,7 +13,8 @@ Meteor.publish("allUsers", function() {
         fields: {
             'username': 1,
             'profile': 1,
-            'services.resume': 1
+            // 'services.resume': 1
+            'status': 1
         }
     });
 });

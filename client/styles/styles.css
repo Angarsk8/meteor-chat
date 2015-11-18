@@ -14,3 +14,15 @@
 .fadeOut {
     animation-name: fadeOut;
 }
+
+.online {
+    color: rgba(0, 160, 0, 0.8);
+}
+
+.offline{
+    color: rgb(185, 185, 185);
+}
+
+.inactive{
+    color: rgba(255, 170, 14, 0.77);
+}
