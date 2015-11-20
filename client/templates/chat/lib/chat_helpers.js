@@ -79,11 +79,10 @@ var messagesNotificationLogic = function(delta, $panel, $more, $remove) {
 };
 
 showHideNotificationPanel = function() {
-
     var currentMessages = Session.get("currentMessages"),
         submittedMessages = Session.get("submittedMessages"),
         delta = currentMessages - submittedMessages;
-
+        
     var $messagesPanel = $(".messages-panel"),
         $notificationPanel = $(".notification-panel"),
         $moreMessagesInfoEl = $("#more-messages-info"),
@@ -96,14 +95,11 @@ showHideNotificationPanel = function() {
 
     if (status) {
         if (scrollDiff > MIN_SCROLL) {
-            console.log(scrollLevel,"1");
             messagesNotificationLogic(delta, $notificationPanel, $moreMessagesInfoEl, $toRemove);
         } else if (status.idle && scrollLevel > PANEL_HEIGHT) {
-            console.log(scrollLevel,"2");
             messagesNotificationLogic(delta, $notificationPanel, $moreMessagesInfoEl, $toRemove);
         } else {
             scrollPanelDown(scrollLevel, 1000);
-            console.log(scrollLevel,"3");
             Session.set("submittedMessages", Messages.find({}).count());
             Session.set("unreadMessages", undefined);
         }

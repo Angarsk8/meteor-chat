@@ -28,6 +28,9 @@ Accounts.onCreateUser(function(options, user) {
         email = user.services[service].email;
         if (user.profile == null) {
             user.profile = {};
+            user.profile.firstname = options.profile.firstname;
+            user.profile.lastname = options.profile.lastname;
+            user.profile.name = options.profile.firstname + " " + options.profile.lastname;
             user.profile.picture = "http://icons.iconarchive.com/icons/flat-icons.com/flat/512/Meteor-icon.png"
         }
         if (email != null) {

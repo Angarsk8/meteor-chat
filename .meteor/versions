@@ -19,6 +19,7 @@ caching-html-compiler@1.0.2
 callback-hook@1.0.4
 check@1.1.0
 coffeescript@1.0.11
+dandv:caret-position@2.1.1
 dburles:mongo-collection-instances@0.3.4
 ddp@1.2.2
 ddp-client@1.2.1
@@ -49,6 +50,7 @@ iron:location@1.0.11
 iron:middleware-stack@1.0.11
 iron:router@1.0.12
 iron:url@1.0.11
+jackyqiu:meteor-jquery-nicescroll@3.6.0
 jquery@1.11.4
 juliancwirko:s-alert@3.1.2
 konecty:autolinker@1.0.3
@@ -64,6 +66,8 @@ meteor-base@1.0.1
 meteortoys:toykit@2.2.1
 minifiers@1.1.7
 minimongo@1.0.10
+mizzao:autocomplete@0.5.1
+mizzao:build-fetcher@0.2.0
 mizzao:timesync@0.3.4
 mizzao:user-status@0.6.6
 mobile-experience@1.0.1

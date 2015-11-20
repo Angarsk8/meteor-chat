@@ -42,6 +42,10 @@ Template.usersList.helpers({
     }
 });
 
+Template.usersList.onRendered(function () {
+    $(".users-scroll-panel").niceScroll(niceScrollOptions); 
+});
+
 Tracker.autorun(function(c) {
     try {
         UserStatus.startMonitor({

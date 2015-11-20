@@ -16,11 +16,11 @@
                         <li class="{{activeRouteClass 'chatRoom'}}">
                             <a href="{{pathFor 'chatRoom'}}">Chat</a>
                         </li>
-                        <li>
-                            <a class="logout" href="#">Logout</a>
-                        </li>
                         <li class="{{activeRouteClass 'profile'}}">
                             <a href="{{pathFor 'profile'}}">{{currentUsername}} <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li>
+                            <a class="logout" href="#">Logout</a>
                         </li>
                     {{else}}
                         <li class="active">

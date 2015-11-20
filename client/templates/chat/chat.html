@@ -4,14 +4,14 @@
             <div class="col-md-8">
                 <div class="panel panel-default">
                     <div class="panel-heading" style="color: #5e5e5e;">
-                        RECENT CHAT HISTORY
+                        Recent Chat History
                     </div>
                     {{> messagesPanel}}
                     <div class="panel-footer">
                         <div class="input-group">
-                            <input id="message" type="text" class="form-control" placeholder="Enter Message" />
-                            <span class="input-group-btn">
-                                <button class="btn btn-info send-button" type="button">SEND</button>
+                            {{> inputAutocomplete settings=settings id="message" class="form-control" name="message" placeholder="Enter Message" }}
+                                <span class="input-group-btn">
+                                <button class="btn btn-info send-button" type="button">Send</button>
                             </span>
                         </div>
                     </div>
@@ -20,11 +20,9 @@
             <div class="col-md-4">
                 <div class="panel panel-default">
                     <div class="panel-heading" style="color: #5e5e5e;">
-                        USERS LIST
+                        Users List
                     </div>
-                    <div class="panel-body" style="max-height: 520px;overflow: auto;">
-                        {{> usersList}}
-                    </div>
+                    {{> usersList}}
                 </div>
             </div>
         </div>

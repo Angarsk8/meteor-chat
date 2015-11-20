@@ -39,3 +39,25 @@ Template.chatRoom.events({
         sendMessage();
     }
 });
+
+Template.chatRoom.helpers({
+    settings: function() {
+        return {
+            position: "top",
+            limit: 10,
+            rules: [{
+                token: '@',
+                collection: Meteor.users,
+                field: 'username',
+                options: '', // Use case-sensitive match to take advantage of server index.
+                filter: {
+                    _id: {
+                        $nin: [Meteor.userId()]
+                    }
+                },
+                template: Template.userPill,
+                noMatchTemplate: Template.serverNoMatch
+            }]
+        }
+    }
+});

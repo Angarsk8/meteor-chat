@@ -1,0 +1,18 @@
+<template name="userPill">
+    <div class="media-body">
+        <div class="media">
+            <a class="pull-left" href="#">
+                <img class="media-object img-rounded" style="height: 30px; width: 30px;" src="{{profile.picture}}" />
+            </a>
+            <div class="media-body">
+                <h6 class="autocomplete-username">{{username}}
+                    <span class="glyphicon glyphicon-user {{status}} pull-right" aria-hidden="true"></span>
+                    <div class="text-muted autocomplete-profilename">{{profile.name}}</div>
+                </h6>
+            </div>
+        </div>
+    </div>
+</template>
+<template name="serverNoMatch">
+    <span class="text-danger">No users found!</span>
+</template>

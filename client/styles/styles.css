@@ -19,10 +19,46 @@
     color: rgba(0, 160, 0, 0.8);
 }
 
-.offline{
+.offline {
     color: rgb(185, 185, 185);
 }
 
-.inactive{
+.inactive {
     color: rgba(255, 170, 14, 0.77);
+}
+
+.-autocomplete-container {
+    max-width: 450px;
+}
+
+li.-autocomplete-item .autocomplete-username {
+    color: rgba(82, 82, 82, 0.86);
+}
+
+li.-autocomplete-item.selected .autocomplete-username {
+    color: #EDEDED;
+}
+
+li.-autocomplete-item .autocomplete-profilename {
+    margin-left: 10px;
+    font-style: italic;
+    display: inline;
+    color: #A6A6A6;
+    font-weight: light;
+}
+
+li.-autocomplete-item.selected .autocomplete-profilename {
+    color: #E1E1E1;
+}
+
+li.-autocomplete-item.selected .online {
+     color: rgb(103, 240, 103);
+}
+
+li.-autocomplete-item.selected .inactive {
+     color:#FFDE28;
+}
+
+li.-autocomplete-item.selected .offline {
+     color: rgb(224, 224, 224);
 }

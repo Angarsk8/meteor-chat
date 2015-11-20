@@ -12,6 +12,10 @@ Template.messagesPanel.onCreated(function() {
     this.subscribe('messages');
 });
 
+Template.messagesPanel.onRendered(function() {
+    $(".messages-scroll-panel").niceScroll(niceScrollOptions);
+});
+
 Template.messagesPanel.events({
     'click .notification-panel': function(e) {
         Session.set("submittedMessages", Messages.find({}).count());
