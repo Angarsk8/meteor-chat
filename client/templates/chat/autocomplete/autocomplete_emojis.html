@@ -1,0 +1,15 @@
+<template name="emojiPill">
+    <div class="media-body">
+        <div class="media">
+            <a class="pull-left" href="#">
+                <img src="{{path}}" title="{{alias}}" alt="{{description}}" class="emoji" style="height: 20px; width: 20px;">
+            </a>
+            <div class="media-body">
+                <h6 class="autocomplete-emoji-alias">:{{alias}}</h6>
+            </div>
+        </div>
+    </div>
+</template>
+<template name="emojisNoMatch">
+    <span class="text-danger">Emoji not found!</span>
+</template>

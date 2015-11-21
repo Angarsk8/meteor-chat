@@ -46,18 +46,42 @@ Template.chatRoom.helpers({
             position: "top",
             limit: 10,
             rules: [{
-                token: '@',
+                token: '#',
                 collection: Meteor.users,
                 field: 'username',
-                options: '', // Use case-sensitive match to take advantage of server index.
+                options: '', 
                 filter: {
                     _id: {
                         $nin: [Meteor.userId()]
                     }
                 },
                 template: Template.userPill,
-                noMatchTemplate: Template.serverNoMatch
-            }]
+                noMatchTemplate: Template.usersNoMatch
+            }, {
+                token: ':',
+                collection: Emojis,
+                field: 'alias',
+                matchAll: true,
+                options: '', 
+                template: Template.emojiPill,
+                noMatchTemplate: Template.emojisNoMatch
+            }, ]
+        }
+    }
+});
+
+Template.chatRoom.events({
+    "autocompleteselect input#message": function(e, tmp, doc) {
+        var $messageInput = $("input#message"),
+            currentText = $messageInput.val(),
+            lastSelected = _.last(
+                currentText
+                .trim()
+                .split(" ")
+            );
+        if (_.contains(lastSelected, ":")) {
+            var validText = currentText.trim() + ": ";
+            $messageInput.val(validText);
         }
     }
 });

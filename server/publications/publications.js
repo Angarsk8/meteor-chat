@@ -22,3 +22,7 @@ Meteor.publish("allUsers", function() {
 Meteor.publish("messages", function() {
     return Messages.find({});
 })
+
+Meteor.publish('emojis', function() {
+    return Emojis.find({});
+});

@@ -26,7 +26,7 @@ Meteor.startup(function() {
     };
 
     //-- Email text
-    Accounts.emailTemplates.verifyEmail.html = function(user, url) {
-      return '<h1>Thank you for registering</h1>.  Please click on the following link to verify your email address: \r\n' + url;
-    };
+    // Accounts.emailTemplates.verifyEmail.html = function(user, url) {
+    //   return '<h1>Thank you for registering</h1>.  Please click on the following link to verify your email address: \r\n' + url;
+    // };
 });

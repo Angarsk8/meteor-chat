@@ -27,15 +27,24 @@
     color: rgba(255, 170, 14, 0.77);
 }
 
-.-autocomplete-container {
+/*.-autocomplete-container {
     max-width: 450px;
-}
+}*/
 
 li.-autocomplete-item .autocomplete-username {
     color: rgba(82, 82, 82, 0.86);
 }
 
+
 li.-autocomplete-item.selected .autocomplete-username {
+    color: #EDEDED;
+}
+
+li.-autocomplete-item .autocomplete-emoji-alias {
+    color: rgba(82, 82, 82, 0.86);
+}
+
+li.-autocomplete-item.selected .autocomplete-emoji-alias {
     color: #EDEDED;
 }
 
@@ -52,13 +61,25 @@ li.-autocomplete-item.selected .autocomplete-profilename {
 }
 
 li.-autocomplete-item.selected .online {
-     color: rgb(103, 240, 103);
+    color: rgb(103, 240, 103);
 }
 
 li.-autocomplete-item.selected .inactive {
-     color:#FFDE28;
+    color: #FFDE28;
 }
 
 li.-autocomplete-item.selected .offline {
-     color: rgb(224, 224, 224);
+    color: rgb(224, 224, 224);
+}
+
+img.emoji {
+    font-size: inherit;
+    height: 2.7ex;
+    width: auto;
+    min-width: 15px;
+    min-height: 15px;
+    display: inline-block;
+    margin: -0.4ex .15em 0;
+    line-height: normal;
+    vertical-align: middle;
 }

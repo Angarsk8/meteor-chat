@@ -42,6 +42,10 @@ Template.usersList.helpers({
     }
 });
 
+Template.usersList.onCreated(function () {
+    this.subscribe('allUsers');
+});
+
 Template.usersList.onRendered(function () {
     $(".users-scroll-panel").niceScroll(niceScrollOptions); 
 });

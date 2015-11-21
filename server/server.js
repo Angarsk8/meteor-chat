@@ -90,3 +90,13 @@ Accounts.onCreateUser(function(options, user) {
 });
 
 process.env.HTTP_FORWARDED_COUNT = 1;
+
+// Emojis.find({}).forEach(function(emoji) {
+//     Emojis.update({
+//         _id: emoji._id
+//     }, {
+//         $set: {
+//             alias: emoji.alias.replace(":", "")
+//         }
+//     });
+// });

@@ -1,26 +1,30 @@
 <template name="usersList">
-    <div class="panel-body users-scroll-panel" style="max-height: 450px;overflow-y: auto;">
-        <ul class="media-list users-panel">
-            {{#transition in="fadeInDown" out="fadeOut" }}
-                {{#each users}}
-                    <li class="media animated out" id="{{_id}}" style="border-bottom: 1px solid rgba(0, 0, 0, 0.11); padding-bottom: 10px;">
-                        <div class="media-body">
-                            <div class="media">
-                                <a class="pull-left" href="#">
-                                    <img class="media-object img-circle" style="height: 40px; width: 40px;" src="{{profile.picture}}" />
-                                </a>
-                                <div class="media-body">
-                                    <h5 style="color: rgb(82, 82, 82);">{{username}}
+    <div class="panel-body users-scroll-panel" style="min-height: 100px;max-height: 450px;overflow-y: auto;">
+        {{#if Template.subscriptionsReady}}
+            <ul class="media-list users-panel">
+                {{#transition in="fadeInDown" out="fadeOut" }}
+                    {{#each users}}
+                        <li class="media animated out" id="{{_id}}" style="border-bottom: 1px solid rgba(0, 0, 0, 0.11); padding-bottom: 10px;">
+                            <div class="media-body">
+                                <div class="media">
+                                    <a class="pull-left" href="#">
+                                        <img class="media-object img-circle" style="height: 40px; width: 40px;" src="{{profile.picture}}" />
+                                    </a>
+                                    <div class="media-body">
+                                        <h5 style="color: rgb(82, 82, 82);">{{username}}
                                     <span class="glyphicon glyphicon-user {{status}} pull-right" aria-hidden="true"></span>
                                     <small class="text-muted" style="text-transform: capitalize;">{{status}}</small>
                                 </h5>
-                                    <small class="text-muted">{{lastActivity}}</small>
+                                        <small class="text-muted">{{lastActivity}}</small>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </li>
-                {{/each}}
-            {{/transition}}
-        </ul>
+                        </li>
+                    {{/each}}
+                {{/transition}}
+            </ul>
+        {{else}}
+            {{> spinner}}
+        {{/if}}
     </div>
 </template>
