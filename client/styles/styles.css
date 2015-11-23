@@ -27,6 +27,7 @@
     color: rgba(255, 170, 14, 0.77);
 }
 
+
 /*.-autocomplete-container {
     max-width: 450px;
 }*/
@@ -34,7 +35,6 @@
 li.-autocomplete-item .autocomplete-username {
     color: rgba(82, 82, 82, 0.86);
 }
-
 
 li.-autocomplete-item.selected .autocomplete-username {
     color: #EDEDED;
@@ -70,6 +70,10 @@ li.-autocomplete-item.selected .inactive {
 
 li.-autocomplete-item.selected .offline {
     color: rgb(224, 224, 224);
+}
+
+li.-autocomplete-item.selected .user-image {
+    border: solid 1px #EDEDED;
 }
 
 img.emoji {

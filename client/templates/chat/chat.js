@@ -37,6 +37,19 @@ Template.chatRoom.events({
     'click button.send-button': function(e) {
         e.preventDefault();
         sendMessage();
+    },
+    "autocompleteselect input#message": function(e, tmp, doc) {
+        var $messageInput = $("input#message"),
+            currentText = $messageInput.val(),
+            lastSelected = _.last(
+                currentText
+                .trim()
+                .split(" ")
+            );
+        if (_.contains(lastSelected, ":")) {
+            var validText = currentText.trim() + ": ";
+            $messageInput.val(validText);
+        }
     }
 });
 
@@ -49,7 +62,7 @@ Template.chatRoom.helpers({
                 token: '#',
                 collection: Meteor.users,
                 field: 'username',
-                options: '', 
+                options: '',
                 filter: {
                     _id: {
                         $nin: [Meteor.userId()]
@@ -62,26 +75,10 @@ Template.chatRoom.helpers({
                 collection: Emojis,
                 field: 'alias',
                 matchAll: true,
-                options: '', 
+                options: '',
                 template: Template.emojiPill,
                 noMatchTemplate: Template.emojisNoMatch
             }, ]
-        }
-    }
-});
-
-Template.chatRoom.events({
-    "autocompleteselect input#message": function(e, tmp, doc) {
-        var $messageInput = $("input#message"),
-            currentText = $messageInput.val(),
-            lastSelected = _.last(
-                currentText
-                .trim()
-                .split(" ")
-            );
-        if (_.contains(lastSelected, ":")) {
-            var validText = currentText.trim() + ": ";
-            $messageInput.val(validText);
         }
     }
 });
