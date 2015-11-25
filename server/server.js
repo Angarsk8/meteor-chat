@@ -1,24 +1,24 @@
-var getValidUsername = function(email) {
-    var firstPartOfEmail = email.split("@")[0];
-    var validUsername = false;
-    var i = 0;
+let getValidUsername = (email) => {
+    let firstPartOfEmail = email.split("@")[0];
+    let validUsername = false;
+    let i = 0;
     do {
-        var possibleUsername = firstPartOfEmail + (i == 0 ? "" : "." + i);
+        let possibleUsername = firstPartOfEmail + (i == 0 ? "" : "." + i);
         validUsername = !userExists(possibleUsername);
         i++;
     } while (!validUsername);
     return possibleUsername;
 };
 
-var userExists = function(username) {
+let userExists = (username) => {
     return Accounts.findUserByUsername(username) ? true : false;
 };
 
 Accounts.onCreateUser(function(options, user) {
-    var email, oldUser, service;
+    let email, oldUser, service;
     if (user.services != null) {
         service = _.keys(user.services)[0];
-        var newService = _.chain(user.services)
+        let newService = _.chain(user.services)
             .keys()
             .without("resume")
             .last()
@@ -89,7 +89,7 @@ Accounts.onCreateUser(function(options, user) {
     return user;
 });
 
-process.env.HTTP_FORWARDED_COUNT = 1;
+// process.env.HTTP_FORWARDED_COUNT = 1;
 
 // Emojis.find({}).forEach(function(emoji) {
 //     Emojis.update({

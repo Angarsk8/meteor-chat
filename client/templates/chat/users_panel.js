@@ -1,9 +1,9 @@
-relativeTime = function(timeAgo) {
-    var diff = moment.utc(TimeSync.serverTime() - timeAgo);
-    var time = diff.format("H:mm:ss");
-    var days = diff.format("DDD") - 1;
-    var ago = (days ? days + "d " : "") + time;
-    return ago + " Ago";
+relativeTime = (timeAgo) => {
+    let diff = moment.utc(TimeSync.serverTime() - timeAgo),
+        time = diff.format("H:mm:ss"),
+        days = diff.format("DDD") - 1,
+        ago = (days ? `${days}d ` : "") + time;
+    return `${ago} Ago`;
 };
 
 Template.usersList.helpers({
@@ -11,7 +11,7 @@ Template.usersList.helpers({
         return Meteor.users.find({});
     },
     status: function() {
-        var status = this.status;
+        let status = this.status;
         if (status) {
             if (status.idle) {
                 return "inactive";
@@ -42,12 +42,12 @@ Template.usersList.helpers({
     }
 });
 
-Template.usersList.onCreated(function () {
+Template.usersList.onCreated(function() {
     this.subscribe('allUsers');
 });
 
-Template.usersList.onRendered(function () {
-    $(".users-scroll-panel").niceScroll(niceScrollOptions); 
+Template.usersList.onRendered(function() {
+    $(".users-scroll-panel").niceScroll(niceScrollOptions);
 });
 
 Tracker.autorun(function(c) {

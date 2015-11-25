@@ -20,7 +20,6 @@ twbs:bootstrap
 iron:router
 accounts-password
 msavin:mongol
-accounts-facebook
 useraccounts:bootstrap
 useraccounts:iron-routing
 underscore
@@ -40,3 +39,5 @@ jackyqiu:meteor-jquery-nicescroll
 mizzao:autocomplete
 lookback:emoji
 markdown
+email
+http

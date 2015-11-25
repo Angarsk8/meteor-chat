@@ -1,8 +1,6 @@
-var MAX_MESSAGES = 10,
-    PANEL_HEIGHT = 450,
-    MIN_SCROLL = 150;
+const [MAX_MESSAGES, PANEL_HEIGHT, MIN_SCROLL] = [10, 450, 150];
 
-scrollPanelDown = function(scrollHeight, time) {
+scrollPanelDown = (scrollHeight, time) => {
     $('.messages-panel')
         .stop()
         .animate({
@@ -10,7 +8,7 @@ scrollPanelDown = function(scrollHeight, time) {
         }, time);
 };
 
-scrollDownToElement = function(scrollTop, topOfNotificationPanel, time) {
+scrollDownToElement = (scrollTop, topOfNotificationPanel, time) => {
     $('.messages-panel')
         .stop()
         .animate({
@@ -18,36 +16,51 @@ scrollDownToElement = function(scrollTop, topOfNotificationPanel, time) {
         }, time);
 };
 
-var pluralize = function(delta) {
+let pluralize = (delta) => {
     if (delta > MAX_MESSAGES) {
         return "More Than 10 New Messages"
     } else if (delta > 1) {
-        return delta + " New Messages";
+        return `${delta} New Messages`;
     } else if (delta === 1) {
-        return "1 New Message"
+        return `${delta} New Message`;
     }
 };
 
-var updateMessagesNotification = function(delta) {
-    var message = "Last " + delta + " Messages";
-    var moreMessagesInfoEl = $("#more-messages-info");
+let updateMessagesNotification = (delta) => {
+    let message = `Last ${delta} Messages`,
+        moreMessagesInfoEl = $("#more-messages-info");
     moreMessagesInfoEl
         .find("div")
         .last()
         .html(message);
 };
 
-var insertNewMessagesNotification = function(delta) {
-    var child = $(".message:nth-last-child(" + delta + ")");
-    var moreMessagesInfoEl = "<div id='more-messages-info'>" +
-        "<div style='height: 1px; background-color: rgba(255, 0, 0, 0.35);'></div>" +
-        "<div style='color: rgba(255, 0, 0, 0.42);text-align: center;padding-top: 4px; font-size: smaller;'>" +
-        "Last Message</div>" +
-        "</div>";
+let insertNewMessagesNotification = (delta) => {
+    let NotificationStyles = {
+        lineStyles: `
+            height: 1px;
+            background-color: rgba(255, 0, 0, 0.35);
+        `,
+        textStyles: `
+            color: rgba(255, 0, 0, 0.42);
+            text-align: center;
+            padding-top: 4px;
+            font-size: smaller;
+        `
+    };
+
+    let child = $(`.message:nth-last-child(${delta})`),
+        moreMessagesInfoEl = `
+            <div id='more-messages-info'>
+                <div style='${NotificationStyles.lineStyles}'></div>
+                <div style='${NotificationStyles.textStyles}'>
+                Last Message</div>
+            </div>
+        `;
     child.before(moreMessagesInfoEl);
 };
 
-var handleNotificationMessages = function(delta, $more, $remove) {
+let handleNotificationMessages = (delta, $more, $remove) => {
     if ($more.length === 0) {
         if ($remove.length > 0) {
             $remove
@@ -58,12 +71,12 @@ var handleNotificationMessages = function(delta, $more, $remove) {
         }
         insertNewMessagesNotification(delta);
     } else {
-        var count = delta < MAX_MESSAGES ? delta : MAX_MESSAGES;
+        let count = delta < MAX_MESSAGES ? delta : MAX_MESSAGES;
         updateMessagesNotification(count);
     }
 };
 
-var messagesNotificationLogic = function(delta, $panel, $more, $remove) {
+let messagesNotificationLogic = (delta, $panel, $more, $remove) => {
     if (delta > 0) {
         $panel
             .removeClass("hidden")
@@ -78,12 +91,12 @@ var messagesNotificationLogic = function(delta, $panel, $more, $remove) {
     }
 };
 
-showHideNotificationPanel = function() {
-    var currentMessages = Session.get("currentMessages"),
+showHideNotificationPanel = () => {
+    let currentMessages = Session.get("currentMessages"),
         submittedMessages = Session.get("submittedMessages"),
         delta = currentMessages - submittedMessages;
-        
-    var $messagesPanel = $(".messages-panel"),
+
+    let $messagesPanel = $(".messages-panel"),
         $notificationPanel = $(".notification-panel"),
         $moreMessagesInfoEl = $("#more-messages-info"),
         $toRemove = $(".remove"),
@@ -91,7 +104,7 @@ showHideNotificationPanel = function() {
         scrollLevel = $messagesPanel.scrollTop() + PANEL_HEIGHT,
         scrollDiff = scrollHeight - scrollLevel;
 
-    var status = Meteor.user().status;
+    let status = Meteor.user().status;
 
     if (status) {
         if (scrollDiff > MIN_SCROLL) {

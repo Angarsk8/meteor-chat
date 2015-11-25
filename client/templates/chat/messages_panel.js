@@ -1,4 +1,4 @@
-var hideMessagesNotification = function(time) {
+let hideMessagesNotification = (time) => {
     $("#more-messages-info")
         .delay(time)
         .removeAttr("id")
@@ -19,21 +19,21 @@ Template.messagesPanel.onRendered(function() {
 Template.messagesPanel.events({
     'click .notification-panel': function(e) {
         Session.set("submittedMessages", Messages.find({}).count());
-        var scrollTop = $(".messages-panel").scrollTop();
-        var fixValue = 60;
-        var topOfNotificationPanel = $("#more-messages-info").position().top - fixValue;
+        let scrollTop = $(".messages-panel").scrollTop(),
+            fixValue = 60,
+            topOfNotificationPanel = $("#more-messages-info").position().top - fixValue;
         scrollDownToElement(scrollTop, topOfNotificationPanel, 1000);
         hideMessagesNotification(6000);
     },
     'scroll .messages-panel': function(e) {
-        var panelHeight = 450,
+        let panelHeight = 450,
             scrollTop = $(".messages-panel").scrollTop(),
             scrollHeight = $(".messages-panel")[0].scrollHeight,
             scrollLevel = scrollTop + panelHeight,
             $moreMessagesInfoEl = $("#more-messages-info");
 
         if ($moreMessagesInfoEl.length !== 0) {
-            var topOfNotificationPanel = $moreMessagesInfoEl.position().top,
+            let topOfNotificationPanel = $moreMessagesInfoEl.position().top,
                 scrollLevelBefore = scrollTop + topOfNotificationPanel;
             if (scrollLevel > scrollLevelBefore) {
                 $(".notification-panel").fadeOut(1000, function() {

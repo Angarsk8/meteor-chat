@@ -1,28 +1,63 @@
-var sendMessage = function() {
-    var user = Meteor.user();
+let matchImagePattern = (body) => {
+    let matchImageRegexp = /((https?|ftp):)?\/\/.*(jpeg|jpg|png|gif|bmp)$/i,
+        validation = matchImageRegexp.exec(body);
+
+    return validation ? _.first(validation) : null;
+};
+
+let matchGiphyPattern = (body) => {
+    let matchGiphyRegexp = /^\/giphy\s+\w*/i,
+        validation = matchGiphyRegexp.exec(body);
+
+    return validation ? true : false;
+};
+
+let removeNotificationMessage = ($remove) => {
+    if ($remove.length > 0) {
+        $remove
+            .dequeue()
+            .hide("slow", function() {
+                $(this).remove();
+            });
+    }
+};
+
+let sendMessage = () => {
+    let user = Meteor.user();
     if (user) {
-        var name = user.username;
-        var inputMessage = $('#message');
-        var message = {
-            body: inputMessage.val()
+        let inputMessage = $('#message'),
+            body = inputMessage.val(),
+            matchImage = matchImagePattern(body),
+            matchGiphy = matchGiphyPattern(body);
+
+        let message = {
+            body: body,
+            image: {
+                flag: true,
+                url: ""
+            }
         };
+
         if (message.body != '') {
-            Meteor.call("insertMessage", message, function(err, result) {
+            if (matchGiphy) {
+                message.image.flag = false;
+                message.image.url = body.trim().replace("/giphy", "");
+            } else if (matchImage) {
+                message.image.url = matchImage;
+            }
+
+            Meteor.call("insertMessage", message, (err, result) => {
                 if (err) {
                     console.error(err);
+                } else {
+                    let scrollHeight = $(".messages-panel")[0].scrollHeight,
+                        $remove = $(".remove");
+                    scrollPanelDown(scrollHeight, 1000);
+                    removeNotificationMessage($remove);
+                    Session.set("submittedMessages", Messages.find({}).count());
                 }
             });
-            var scrollHeight = $(".messages-panel")[0].scrollHeight;
-            var $remove = $(".remove");
-            scrollPanelDown(scrollHeight, 1000);
-            if ($remove.length > 0) {
-                $remove
-                    .dequeue()
-                    .hide("slow", function() {
-                        $(this).remove();
-                    });
-            }
-            Session.set("submittedMessages", Messages.find({}).count());
+
             inputMessage.val("");
         }
     }
@@ -39,7 +74,7 @@ Template.chatRoom.events({
         sendMessage();
     },
     "autocompleteselect input#message": function(e, tmp, doc) {
-        var $messageInput = $("input#message"),
+        let $messageInput = $("input#message"),
             currentText = $messageInput.val(),
             lastSelected = _.last(
                 currentText

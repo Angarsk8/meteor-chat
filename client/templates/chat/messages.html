@@ -12,7 +12,7 @@
                         <img class="media-object img-circle " style="max-height:50px;" src="{{authorImage}}" />
                     </a>
                     <div class="media-body">
-                        <span style="color: rgb(82, 82, 82);">
+                        <span class="message-text" style="color: rgb(82, 82, 82);">
                             {{!-- {{#markdown}} --}}
                                 {{#emoji}}
                                     {{#autolink}}
@@ -21,6 +21,7 @@
                                 {{/emoji}}
                             {{!-- {{/markdown}} --}}
                         </span>
+                        {{!-- <img class="{{showClass}}" src="{{imagePath}}" width="100" height="100"> --}}
                         <br />
                         <small class="text-muted">{{author}} | {{createdAtFormatted}}</small>
                         <hr />

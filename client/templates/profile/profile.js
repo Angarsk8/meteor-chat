@@ -2,12 +2,12 @@ Session.set("loading", false);
 
 Template.profile.helpers({
     showChangePassword: function() {
-        var user = Meteor.user();
+        let user = Meteor.user();
         if (user)
             return user.username ? true : false;
     },
     canChangePassword: function() {
-        var user = Meteor.user();
+        let user = Meteor.user();
         if (user) {
             return _.contains(user.registeredServices, "password");
         }
@@ -22,7 +22,7 @@ Template.profile.events({
         e.preventDefault();
         AccountsTemplates.logout(function(err) {
             if (err) {
-                alert("an error has ocurred while logging you out: " + err.reason);
+                alert(`an error has ocurred while logging you out: ${err.reason}`);
             } else {
                 alert("logged out succesfully");
             }
@@ -35,7 +35,7 @@ Template.profile.events({
         Accounts.logoutOtherClients(function(err) {
             Session.set("loading", false);
             if (err) {
-                alert("an error has ocurred while logging out other clients: " + err.reason);
+                alert(`an error has ocurred while logging out other clients: ${err.reason}`);
             } else {
                 alert("other clients logged out succesfully");
             }
@@ -44,9 +44,9 @@ Template.profile.events({
     "click a.reset": function(e, t) {
         e.preventDefault();
         Session.set("loading", true);
-        var user = Meteor.user();
+        let user = Meteor.user();
         if (user) {
-            var options = {
+            let options = {
                 email: user.emails[0].address
             }
             Accounts.forgotPassword(options, function(err) {

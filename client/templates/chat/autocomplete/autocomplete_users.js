@@ -1,15 +1,6 @@
 Template.userPill.helpers({
-    labelClass: function() {
-        if (this.status.idle) {
-            return "label-warning"
-        } else if (this.status.online) {
-            return "label-success"
-        } else {
-            return "label-default"
-        }
-    },
     status: function() {
-        var status = this.status;
+        let status = this.status;
         if (status) {
             if (status.idle) {
                 return "inactive";
@@ -23,10 +14,9 @@ Template.userPill.helpers({
 });
 
 Template.userPill.onRendered(function() {
-    var autoContainer = $(".-autocomplete-container");
-    var maxWidth = parseInt(autoContainer.css("max-width"));
+    let autoContainer = $(".-autocomplete-container"),
+        maxWidth = parseInt(autoContainer.css("max-width"));
     if (isNaN(maxWidth) || maxWidth > 250) {
         autoContainer.css("max-width", "450px");
     };
 });
-
