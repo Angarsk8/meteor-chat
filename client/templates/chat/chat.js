@@ -54,7 +54,6 @@ let sendMessage = () => {
                         $remove = $(".remove");
 
                     removeNotificationMessage($remove);
-                    scrollPanelDown(scrollHeight, 0);
                     Session.set("submittedMessages", Messages.find({}).count());
                 }
             });

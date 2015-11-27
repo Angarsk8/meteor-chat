@@ -104,16 +104,19 @@ showHideNotificationPanel = () => {
         scrollLevel = $messagesPanel.scrollTop() + PANEL_HEIGHT,
         scrollDiff = scrollHeight - scrollLevel;
 
-    let status = Meteor.user().status;
-    let messageImage = $(".message")
-        .last()
-        .find(".message-image");
-    
-    let minScroll = messageImage.length > 0 ? 400 : 200;
+    let user = Meteor.user(),
+        status = user.status,
+        $messages = $(".message"),
+        $lastMessage = $messages.last(),
+        $lastImage = $lastMessage.find("img.message-image"),
+        $lastAuthorId = $lastMessage.attr("author"),
+        minScroll = $lastImage.length > 0 ? 400 : 200;
 
     if (status) {
         if (scrollDiff > minScroll) {
-            messagesNotificationLogic(delta, $notificationPanel, $moreMessagesInfoEl, $toRemove);
+            user._id === $lastAuthorId ?
+                scrollPanelDown(scrollHeight, 1000) :
+                messagesNotificationLogic(delta, $notificationPanel, $moreMessagesInfoEl, $toRemove);
         } else if (status.idle && scrollLevel > PANEL_HEIGHT) {
             messagesNotificationLogic(delta, $notificationPanel, $moreMessagesInfoEl, $toRemove);
         } else {

@@ -13,7 +13,8 @@ Template.messagesPanel.onCreated(function() {
 });
 
 Template.messagesPanel.onRendered(function() {
-    $(".messages-scroll-panel").niceScroll(niceScrollOptions);
+    // if (OSName !== "MacOS")
+        $(".messages-scroll-panel").niceScroll(niceScrollOptions);
 });
 
 Template.messagesPanel.events({

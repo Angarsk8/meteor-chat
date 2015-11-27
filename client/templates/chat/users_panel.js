@@ -47,7 +47,8 @@ Template.usersList.onCreated(function() {
 });
 
 Template.usersList.onRendered(function() {
-    $(".users-scroll-panel").niceScroll(niceScrollOptions);
+    // if (OSName !== "MacOS")
+        $(".users-scroll-panel").niceScroll(niceScrollOptions);
 });
 
 Tracker.autorun(function(c) {
