@@ -22,7 +22,7 @@ Meteor.methods({
         this.unblock();
 
         const [GIPHY_API, HTTP_VERB, LIMIT, ENDPOINT] = [
-            "dc6zaTOxFJmzC", "GET", 10, "http://api.giphy.com/v1/gifs/"
+            "dc6zaTOxFJmzC", "GET", 21, "http://api.giphy.com/v1/gifs/"
         ];
 
         let encodedKeyword = keyword.trim().replace(" ", "+"),

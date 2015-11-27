@@ -26,7 +26,7 @@ let sendMessage = () => {
     let user = Meteor.user();
     if (user) {
         let inputMessage = $('#message'),
-            body = inputMessage.val(),
+            body = inputMessage.val().trim(),
             matchImage = matchImagePattern(body),
             matchGiphy = matchGiphyPattern(body);
 
@@ -41,7 +41,7 @@ let sendMessage = () => {
         if (message.body != '') {
             if (matchGiphy) {
                 message.image.flag = false;
-                message.image.url = body.trim().replace("/giphy", "");
+                message.image.url = body.replace("/giphy", "");
             } else if (matchImage) {
                 message.image.url = matchImage;
             }
@@ -58,6 +58,7 @@ let sendMessage = () => {
                 }
             });
 
+            Session.set("submittedMessages", Messages.find({}).count());
             inputMessage.val("");
         }
     }

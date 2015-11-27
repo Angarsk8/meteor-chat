@@ -1,30 +1,30 @@
 <template name="chatRoom">
-    <div class="container">
-        <div class="row " style="padding-top:40px;">
-            <div class="col-md-8">
-                <div class="panel panel-default">
-                    <div class="panel-heading" style="color: #5e5e5e;">
-                        Recent Chat History
-                    </div>
-                    {{> messagesPanel}}
-                    <div class="panel-footer">
-                        <div class="input-group">
-                            {{> inputAutocomplete settings=settings id="message" class="form-control" name="message" placeholder="Enter Message" }}
+        <div class="container">
+            <div class="row " style="padding-top:40px;">
+                <div class="col-md-8">
+                    <div class="panel panel-default">
+                        <div class="panel-heading" style="color: #5e5e5e;">
+                            Recent Chat History
+                        </div>
+                        {{> messagesPanel}}
+                        <div class="panel-footer">
+                            <div class="input-group">
+                                {{> inputAutocomplete settings=settings id="message" class="form-control" name="message" placeholder="Enter Message" }}
                                 <span class="input-group-btn">
                                 <button class="btn btn-info send-button" type="button">Send</button>
                             </span>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-4">
-                <div class="panel panel-default">
-                    <div class="panel-heading" style="color: #5e5e5e;">
-                        Users List
+                <div class="col-md-4">
+                    <div class="panel panel-default">
+                        <div class="panel-heading" style="color: #5e5e5e;">
+                            Users List
+                        </div>
+                        {{> usersList}}
                     </div>
-                    {{> usersList}}
                 </div>
             </div>
         </div>
-    </div>
 </template>

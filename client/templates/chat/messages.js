@@ -43,12 +43,15 @@ Template.message.onRendered(function() {
 });
 
 Template.messages.onRendered(function() {
-    let scrollLevel = $(".messages-panel")[0].scrollHeight;
-    scrollPanelDown(scrollLevel, 0);
-    Session.set("initialMessages", query.count());
-    Session.set("submittedMessages", Session.get("initialMessages"));
-    Tracker.autorun(function() {
-        Session.set("currentMessages", query.count());
-        showHideNotificationPanel();
+    $(".messages-panel").imagesLoaded(function() {
+        $(".messages-container").removeClass("hidden");
+        let scrollLevel = $(".messages-panel")[0].scrollHeight;
+        scrollPanelDown(scrollLevel, 0);
+        Session.set("initialMessages", query.count());
+        Session.set("submittedMessages", Session.get("initialMessages"));
+        Tracker.autorun(function() {
+            Session.set("currentMessages", query.count());
+            showHideNotificationPanel();
+        });
     });
 });

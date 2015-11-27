@@ -27,11 +27,6 @@
     color: rgba(255, 170, 14, 0.77);
 }
 
-
-/*.-autocomplete-container {
-    max-width: 450px;
-}*/
-
 li.-autocomplete-item .autocomplete-username {
     color: rgba(82, 82, 82, 0.86);
 }
@@ -57,7 +52,7 @@ li.-autocomplete-item .autocomplete-profilename {
 }
 
 li.-autocomplete-item.selected .autocomplete-profilename {
-    color: #A9A9A9;
+    color: #E0E0E0;
 }
 
 li.-autocomplete-item.selected .online {

@@ -1,12 +1,13 @@
 let getValidUsername = (email) => {
-    let firstPartOfEmail = email.split("@")[0];
-    let validUsername = false;
-    let i = 0;
-    do {
-        let possibleUsername = firstPartOfEmail + (i == 0 ? "" : "." + i);
-        validUsername = !userExists(possibleUsername);
-        i++;
-    } while (!validUsername);
+    let firstPartOfEmail = email.split("@")[0],
+        validUsername = false,
+        possibleUsername,
+        i = 0;
+        do {
+            possibleUsername = firstPartOfEmail + (i == 0 ? "" : "." + i);
+            validUsername = !userExists(possibleUsername);
+            i++;
+        } while (!validUsername);
     return possibleUsername;
 };
 
