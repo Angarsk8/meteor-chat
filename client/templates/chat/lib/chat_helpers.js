@@ -1,4 +1,4 @@
-const [MAX_MESSAGES, PANEL_HEIGHT, MIN_SCROLL] = [10, 450, 150];
+const [MAX_MESSAGES, PANEL_HEIGHT] = [10, 450];
 
 scrollPanelDown = (scrollHeight, time) => {
     $('.messages-panel')
@@ -105,9 +105,14 @@ showHideNotificationPanel = () => {
         scrollDiff = scrollHeight - scrollLevel;
 
     let status = Meteor.user().status;
+    let messageImage = $(".message")
+        .last()
+        .find(".message-image");
+    
+    let minScroll = messageImage.length > 0 ? 400 : 200;
 
     if (status) {
-        if (scrollDiff > MIN_SCROLL) {
+        if (scrollDiff > minScroll) {
             messagesNotificationLogic(delta, $notificationPanel, $moreMessagesInfoEl, $toRemove);
         } else if (status.idle && scrollLevel > PANEL_HEIGHT) {
             messagesNotificationLogic(delta, $notificationPanel, $moreMessagesInfoEl, $toRemove);

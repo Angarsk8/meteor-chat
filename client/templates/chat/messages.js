@@ -32,26 +32,23 @@ Template.message.helpers({
 });
 
 Template.message.onRendered(function() {
-    let messageData = this.data,
-        body = messageData.body,
-        image = messageData.image,
-        id = messageData._id;
+    // let messageData = this.data,
+    //     body = messageData.body,
+    //     image = messageData.image,
+    //     id = messageData._id;
 
-    if (image) {
-        insertMediaContent(image, id);
-    }
+    // if (image) {
+    //     insertMediaContent(image, id);
+    // }
 });
 
 Template.messages.onRendered(function() {
-    $(".messages-panel").imagesLoaded(function() {
-        $(".messages-container").removeClass("hidden");
-        let scrollLevel = $(".messages-panel")[0].scrollHeight;
-        scrollPanelDown(scrollLevel, 0);
-        Session.set("initialMessages", query.count());
-        Session.set("submittedMessages", Session.get("initialMessages"));
-        Tracker.autorun(function() {
-            Session.set("currentMessages", query.count());
-            showHideNotificationPanel();
-        });
+    let scrollLevel = $(".messages-panel")[0].scrollHeight;
+    scrollPanelDown(scrollLevel, 0);
+    Session.set("initialMessages", query.count());
+    Session.set("submittedMessages", Session.get("initialMessages"));
+    Tracker.autorun(function() {
+        Session.set("currentMessages", query.count());
+        showHideNotificationPanel();
     });
 });

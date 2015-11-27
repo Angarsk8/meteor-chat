@@ -1,9 +1,9 @@
 <template name="messages">
-    <div class="hidden messages-container">
-        {{#each messages}}
-            {{> message}}
-        {{/each}}
-    </div>
+    {{!-- <div class="hidden messages-container"> --}}
+    {{#each messages}}
+        {{> message}}
+    {{/each}}
+    {{!-- </div> --}}
 </template>
 <template name="message">
     {{#transition in="fadeInDown" out="fadeOut" }}
@@ -13,7 +13,7 @@
                     <a class="pull-left" href="#">
                         <img class="media-object img-circle " style="max-height:50px;" src="{{authorImage}}" />
                     </a>
-                    <div class="media-body">
+                    <div class="media-body message-body">
                         <span class="message-text" style="color: rgb(82, 82, 82);">
                                 {{#emoji}}
                                     {{#autolink}}
@@ -21,6 +21,19 @@
                                     {{/autolink}}
                                 {{/emoji}}
                         </span>
+                        {{#if image}}
+                            <div style="height: 200px;">
+                                <a href='{{image}}' target='_blank'>
+                                    <img class='img-rounded message-image' src='{{image}}' style='
+                                         display: block;
+                                         margin-top: 13px; 
+                                         max-height: 200px;
+                                         max-width: 400px;
+                                         border: solid 1px rgba(128, 128, 128, 0.3);
+                                         border-radius: 7px;'>
+                                </a>
+                            </div>
+                        {{/if}}
                         <br />
                         <small class="text-muted">{{author}} | {{createdAtFormatted}}</small>
                         <hr />
