@@ -18,9 +18,9 @@ Template.profile.helpers({
 });
 
 Template.profile.events({
-    "click a.logout": function(e, t) {
+    "click a.logout": (e, t) => {
         e.preventDefault();
-        AccountsTemplates.logout(function(err) {
+        AccountsTemplates.logout((err) => {
             if (err) {
                 alert(`an error has ocurred while logging you out: ${err.reason}`);
             } else {
@@ -29,10 +29,10 @@ Template.profile.events({
         });
     },
 
-    "click a.logout-other-clients": function(e, t) {
+    "click a.logout-other-clients": (e, t) => {
         e.preventDefault();
         Session.set("loading", true);
-        Accounts.logoutOtherClients(function(err) {
+        Accounts.logoutOtherClients((err) => {
             Session.set("loading", false);
             if (err) {
                 alert(`an error has ocurred while logging out other clients: ${err.reason}`);
@@ -41,7 +41,7 @@ Template.profile.events({
             }
         });
     },
-    "click a.reset": function(e, t) {
+    "click a.reset": (e, t) => {
         e.preventDefault();
         Session.set("loading", true);
         let user = Meteor.user();
@@ -49,7 +49,7 @@ Template.profile.events({
             let options = {
                 email: user.emails[0].address
             }
-            Accounts.forgotPassword(options, function(err) {
+            Accounts.forgotPassword(options, (err) => {
                 Session.set("loading", false);
                 if (err) {
                     alert(err);

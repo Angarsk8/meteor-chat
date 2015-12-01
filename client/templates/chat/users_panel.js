@@ -26,14 +26,14 @@ Template.usersList.helpers({
         return new Date(TimeSync.serverTime()).toLocaleString();
     },
     lastActivity: function() {
-        var status = this.status;
+        let status = this.status;
         if (status) {
-            var lastActivity = status.lastActivity;
+            let lastActivity = status.lastActivity;
             if (!status.online) {
                 return "Currently Offline";
             } else {
                 if (lastActivity != null) {
-                    return "Last Activity " + relativeTime(lastActivity);
+                    return `Last Activity ${relativeTime(lastActivity)}`;
                 } else {
                     return "Currently Active";
                 }
@@ -47,11 +47,11 @@ Template.usersList.onCreated(function() {
 });
 
 Template.usersList.onRendered(function() {
-    // if (OSName !== "MacOS")
+    if (OSName !== "MacOS")
         $(".users-scroll-panel").niceScroll(niceScrollOptions);
 });
 
-Tracker.autorun(function(c) {
+Tracker.autorun((c) => {
     try {
         UserStatus.startMonitor({
             threshold: 120000,

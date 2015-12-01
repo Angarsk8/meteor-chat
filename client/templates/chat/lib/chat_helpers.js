@@ -17,9 +17,7 @@ scrollDownToElement = (scrollTop, topOfNotificationPanel, time) => {
 };
 
 let pluralize = (delta) => {
-    if (delta > MAX_MESSAGES) {
-        return "More Than 10 New Messages"
-    } else if (delta > 1) {
+    if (delta > 1) {
         return `${delta} New Messages`;
     } else if (delta === 1) {
         return `${delta} New Message`;
@@ -71,7 +69,7 @@ let handleNotificationMessages = (delta, $more, $remove) => {
         }
         insertNewMessagesNotification(delta);
     } else {
-        let count = delta < MAX_MESSAGES ? delta : MAX_MESSAGES;
+        let count = delta;
         updateMessagesNotification(count);
     }
 };
@@ -92,10 +90,12 @@ let messagesNotificationLogic = (delta, $panel, $more, $remove) => {
 };
 
 showHideNotificationPanel = () => {
+    // Reactive Session Variables
     let currentMessages = Session.get("currentMessages"),
         submittedMessages = Session.get("submittedMessages"),
         delta = currentMessages - submittedMessages;
 
+    // Non Reactive Sources
     let $messagesPanel = $(".messages-panel"),
         $notificationPanel = $(".notification-panel"),
         $moreMessagesInfoEl = $("#more-messages-info"),
@@ -104,9 +104,15 @@ showHideNotificationPanel = () => {
         scrollLevel = $messagesPanel.scrollTop() + PANEL_HEIGHT,
         scrollDiff = scrollHeight - scrollLevel;
 
-    let user = Meteor.user(),
-        status = user.status,
-        $messages = $(".message"),
+    // Non Reactive Data Sources
+    let user, status;
+    Tracker.nonreactive(function() {
+        user = Meteor.user();
+        status = user.status;
+    });
+
+    // Non Reactive Sources
+    let $messages = $(".message"),
         $lastMessage = $messages.last(),
         $lastImage = $lastMessage.find("img.message-image"),
         $lastAuthorId = $lastMessage.attr("author"),

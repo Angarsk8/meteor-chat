@@ -1,17 +1,3 @@
-let matchImagePattern = (body) => {
-    let matchImageRegexp = /((https?|ftp):)?\/\/.*(jpeg|jpg|png|gif|bmp)$/i,
-        validation = matchImageRegexp.exec(body);
-
-    return validation ? _.first(validation) : null;
-};
-
-let matchGiphyPattern = (body) => {
-    let matchGiphyRegexp = /^\/giphy\s+\w*/i,
-        validation = matchGiphyRegexp.exec(body);
-
-    return validation ? true : false;
-};
-
 let removeNotificationMessage = ($remove) => {
     if ($remove.length > 0) {
         $remove
@@ -27,23 +13,30 @@ let sendMessage = () => {
     if (user) {
         let inputMessage = $('#message'),
             body = inputMessage.val().trim(),
-            matchImage = matchImagePattern(body),
-            matchGiphy = matchGiphyPattern(body);
+            matchImage = MatchType.matchImagePattern(body),
+            matchGiphy = MatchType.matchGiphyPattern(body),
+            matchUrl = MatchType.matchUrlPattern(body);
 
         let message = {
-            body: body,
-            image: {
+            body,
+            url: {
                 flag: true,
-                url: ""
+                path: "",
+                meta: false
             }
         };
 
         if (message.body != '') {
             if (matchGiphy) {
-                message.image.flag = false;
-                message.image.url = body.replace("/giphy", "");
+                message.url.flag = false;
+                message.body = message.body.toLowerCase();
+                message.url.path = message.body.replace("/giphy", "");
             } else if (matchImage) {
-                message.image.url = matchImage;
+                message.url.path = matchImage;
+            } else if (matchUrl) {
+                message.url.flag = false;
+                message.url.path = matchUrl;
+                message.url.meta = true;
             }
 
             Meteor.call("insertMessage", message, (err, result) => {
@@ -65,16 +58,16 @@ let sendMessage = () => {
 };
 
 Template.chatRoom.events({
-    'keydown input#message': function(e) {
+    'keydown input#message': (e, t) => {
         if (e.which == 13) {
             sendMessage();
         }
     },
-    'click button.send-button': function(e) {
+    'click button.send-button': (e, t) => {
         e.preventDefault();
         sendMessage();
     },
-    "autocompleteselect input#message": function(e, tmp, doc) {
+    "autocompleteselect input#message": (e, t) => {
         let $messageInput = $("input#message"),
             currentText = $messageInput.val(),
             lastSelected = _.last(

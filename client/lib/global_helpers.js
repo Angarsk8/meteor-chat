@@ -1,10 +1,10 @@
-Template.registerHelper("currentUsername", function() {
+Template.registerHelper("currentUsername", () => {
     let user = Meteor.user();
     if (user)
         return user.username != null ? user.username : user.profile.name;
 });
 
-Template.registerHelper('formatDate', function(date) {
+Template.registerHelper('formatDate', (date) => {
     return moment(date).format('MM/DD/YYYY, hh:mm');
 });
 
@@ -20,12 +20,12 @@ niceScrollOptions = {
 OSName = (() => {
     let appVersion = navigator.appVersion;
     if (appVersion.includes("Mac")) {
-    	return "MacOS";
-    }else if(appVersion.includes("Win")){
-    	return "Windows";
-    }else if(appVersion.includes("X11")){
-    	return "UNIX";
-    }else if(appVersion.includes("Linux")){
-    	return "Linux";
+        return "MacOS";
+    } else if (appVersion.includes("Win")) {
+        return "Windows";
+    } else if (appVersion.includes("X11")) {
+        return "UNIX";
+    } else if (appVersion.includes("Linux")) {
+        return "Linux";
     }
 })();

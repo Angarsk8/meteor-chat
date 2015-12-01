@@ -4,11 +4,13 @@ accounts-oauth@1.1.8
 accounts-password@1.1.4
 accounts-ui@1.1.6
 accounts-ui-unstyled@1.1.8
+agarcia038:extract-metadata@0.0.1
 autoupdate@1.2.4
 babel-compiler@5.8.24_1
 babel-runtime@0.1.4
 base64@1.0.4
 binary-heap@1.0.4
+bitomule:simple-metacrawler@0.2.7
 blaze@2.1.3
 blaze-html-templates@1.0.1
 blaze-tools@1.0.4
@@ -63,6 +65,7 @@ markdown@1.0.5
 matb33:collection-hooks@0.8.1
 meteor@1.1.10
 meteor-base@1.0.1
+meteorhacks:async@1.0.0
 meteortoys:toykit@2.2.1
 minifiers@1.1.7
 minimongo@1.0.10

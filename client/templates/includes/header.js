@@ -1,5 +1,5 @@
 Template.header.events({
-    "click a.logout": function(e, t) {
+    "click a.logout": (e, t) => {
         e.preventDefault();
         AccountsTemplates.logout(function(err) {
             if (err) {
@@ -12,8 +12,7 @@ Template.header.events({
 });
 
 Template.header.helpers({
-    activeRouteClass: function( /*all routes go here*/ ) {
-        let args = Array.prototype.slice.call(arguments, 0);
+    activeRouteClass: function(...args) {
         args.pop();
         let active = args.some((route) => {
             return Router.current() && Router.current().route.getName() == route

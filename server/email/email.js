@@ -1,4 +1,4 @@
-Meteor.startup(function() {
+Meteor.startup(() => {
     const SMTP = {
         username: encodeURIComponent('postmaster@sandbox9bb9a68de5e545a8b5580f6e92c4ab24.mailgun.org'),
         password: encodeURIComponent('d5fe53e3e8056406c91dd1677322e671'),

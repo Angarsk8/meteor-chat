@@ -13,20 +13,24 @@ Template.messagesPanel.onCreated(function() {
 });
 
 Template.messagesPanel.onRendered(function() {
-    // if (OSName !== "MacOS")
+    if (OSName !== "MacOS")
         $(".messages-scroll-panel").niceScroll(niceScrollOptions);
 });
 
 Template.messagesPanel.events({
-    'click .notification-panel': function(e) {
+    'click .notification-panel': (e, t) => {
         Session.set("submittedMessages", Messages.find({}).count());
         let scrollTop = $(".messages-panel").scrollTop(),
             fixValue = 60,
             topOfNotificationPanel = $("#more-messages-info").position().top - fixValue;
         scrollDownToElement(scrollTop, topOfNotificationPanel, 1000);
-        hideMessagesNotification(6000);
+        $(".notification-panel").fadeOut(1000, function() {
+            $(this).addClass("hidden");
+            hideMessagesNotification(6000);
+            Session.set("submittedMessages", Messages.find({}).count());
+        });
     },
-    'scroll .messages-panel': function(e) {
+    'scroll .messages-panel': (e, t) => {
         let panelHeight = 450,
             scrollTop = $(".messages-panel").scrollTop(),
             scrollHeight = $(".messages-panel")[0].scrollHeight,

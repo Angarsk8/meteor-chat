@@ -1,5 +1,5 @@
-Meteor.startup(function() {
-    Tracker.autorun(function() {
+Meteor.startup(() => {
+    Tracker.autorun(() => {
         let unread = Session.get("unreadMessages"),
             routerTitle = "UserAccounts Module";
         if (unread) {
